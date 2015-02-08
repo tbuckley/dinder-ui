@@ -1,0 +1,28 @@
+{
+  "name": "Recipes",
+  "version": "0.0.0",
+  "authors": [
+    "Tom Buckley <tbuckley89@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5.0",
+    "core-animated-pages": "Polymer/core-animated-pages#~0.5.2",
+    "paper-tabs": "Polymer/paper-tabs#~0.5.2",
+    "core-toolbar": "Polymer/core-toolbar#~0.5.2",
+    "core-scroll-header-panel": "Polymer/core-scroll-header-panel#~0.5.2",
+    "paper-icon-button": "Polymer/paper-icon-button#~0.5.2",
+    "paper-fab": "Polymer/paper-fab#~0.5.2",
+    "core-icons": "Polymer/core-icons#~0.5.2",
+    "core-list": "Polymer/core-list#~0.5.4"
+  }
+}

@@ -1,0 +1,18 @@
+:host {
+	color: rgba(0,0,0,.54);
+	text-align: center;
+	font-size: 16px;
+}
+
+::content h1 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+::content section {
+	margin-bottom: 16px;
+}
+
+[main] {
+	margin: 32px;
+	max-width: 400px;
+}

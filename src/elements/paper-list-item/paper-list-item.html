@@ -1,0 +1,40 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+
+<polymer-element name="paper-list-item" layout horizontal center>
+  <template>
+    <link rel="stylesheet" href="paper-list-item.css"></link>
+
+    <div class="padding"></div>
+
+    <template if="{{avatar}}">
+      <div class="avatar" layout vertical left center-justified>
+        <content select="[avatar]"></content>
+      </div>
+    </template>
+    
+    <div flex layout vertical center-justified>
+      <div class="title">
+        <content select="[title]"></content>
+      </div>
+      <template if="{{ lines > 1 }}">
+        <div class="description">
+          <content select="[description]"></content>
+        </div>
+      </template>
+    </div>
+
+    <div>
+      <content select="[control]"></content>
+    </div>
+
+    <div class="padding"></div>
+  </template>
+  <script>
+    Polymer({
+      publish: {
+        avatar: false,
+        lines: 1,
+      }
+    });
+  </script>
+</polymer-element>

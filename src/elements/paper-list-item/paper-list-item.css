@@ -1,0 +1,18 @@
+:host([lines="2"][avatar]) {
+	height: 64px;
+}
+
+.avatar {
+	width: 56px;
+}
+.title {
+	font-size: 16px;
+	color: rgba(0,0,0,.87);
+}
+.description {
+	font-size: 14px;
+	color: rgba(0,0,0,.54);
+}
+.padding {
+	width: 16px;
+}

@@ -1,0 +1,55 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+<link rel="import" href="../../components/core-list/core-list.html">
+<link rel="import" href="../../components/core-icon/core-icon.html">
+<link rel="import" href="../../components/paper-button/paper-button.html">
+<link rel="import" href="../../components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-list-item/paper-list-item.html">
+<link rel="import" href="../dinder-placeholder-view/dinder-placeholder-view.html">
+
+<polymer-element name="dinder-invitations-list">
+  <template>
+    <link rel="stylesheet" href="dinder-invitations-list.css" />
+    
+    <!-- Empty list -->
+    <template if="{{ !hasInvitations }}">
+      <dinder-placeholder-view>
+        <section>
+          <h1>Welcome!</h1>
+          <div>To get started planning a dinner, create a new group with your friends.</div>
+        </section>
+        <section>
+          <paper-button>Create group</paper-button>
+        </section>
+      </dinder-placeholder-view>
+    </template>
+
+    <!-- Populated list -->
+    <template if="{{ hasInvitations }}">
+      <core-list data="{{ groups }}">
+        <template>
+          <paper-list-item avatar lines="2">
+            <div avatar>
+              <div>{{ model.name[0] }}</div>
+            </div>
+            <div title>{{ model.name }}</div>
+            <div description>PLACEHOLDER</div>
+            <paper-icon-button control icon="check"></paper-icon-button>
+            <paper-icon-button control icon="clear"></paper-icon-button>
+          </paper-list-item>
+        </template>
+      </core-list>
+    </template>
+
+  </template>
+  <script>
+    Polymer({
+      publish: {
+        groups: null,
+        meals: null,
+      },
+      computed: {
+        hasInvitations: "groups && groups.length > 0",
+      },
+    });
+  </script>
+</polymer-element>

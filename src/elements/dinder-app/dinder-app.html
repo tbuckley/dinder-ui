@@ -1,0 +1,34 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+<link rel="import" href="../../components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../components/font-roboto/roboto.html">
+<link rel="import" href="../dinder-model/dinder-model.html">
+<link rel="import" href="../dinder-welcome-page/dinder-welcome-page.html">
+<link rel="import" href="../dinder-main-page/dinder-main-page.html">
+<link rel="import" href="../dinder-invite-page/dinder-invite-page.html">
+<link rel="import" href="../dinder-recipe-page/dinder-recipe-page.html">
+
+<polymer-element name="dinder-app" attributes="">
+	<template>
+		<link rel="stylesheet" href="dinder-app.css">
+
+		<dinder-model id="model"></dinder-model>
+
+		<core-animated-pages selected="{{page}}" valueattr="id" fit>
+			<dinder-welcome-page id="welcome" model="{{$.model}}"></dinder-welcome-page>
+			<dinder-main-page id="main" model="{{$.model}}" on-view-invitation="{{viewInvitation}}"></dinder-main-page>
+			<dinder-invite-page id="invitation" model="{{$.model}}"></dinder-invite-page>
+			<dinder-recipe-page id="recipe" model="{{$.model}}"></dinder-recipe-page>
+		</core-animated-pages>
+
+	</template>
+	<script>
+		Polymer({
+			page: "main",
+
+			viewInvitation: function(event, details, sender) {
+				this.$.invitation.invitation = details.invitation;
+				this.page = "invitation";
+			}
+		});
+	</script>
+</polymer-element>

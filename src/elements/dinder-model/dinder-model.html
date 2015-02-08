@@ -1,0 +1,113 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+
+<polymer-element name="dinder-model" attributes="">
+	<script>
+		(function() {
+
+			var AVAILABLE = 1,
+			    UNAVAILABLE = 2,
+			    NOT_RESPONDED = 3;
+
+			Polymer({
+				consts: {
+					AVAILABLE: AVAILABLE,
+			    	UNAVAILABLE: UNAVAILABLE,
+			    	NOT_RESPONDED: NOT_RESPONDED,
+				},
+
+				user: {
+					id: 1,
+					name: "Tom Buckley",
+					email: "tom@buckley.com",
+				},
+				groups: [
+					{
+						id: 1234,
+						name: "Fell Yeah",
+						members: [
+							{
+								userId: 1,
+								name: "Tom Buckley",
+								email: "tom@buckley.com",
+							},
+							{
+								userId: 2,
+								name: "Luke Segars",
+								email: "luke@segars.com",
+							},
+							{
+								userId: 3,
+								name: "Ryan Schoen",
+								email: "ryan@schoen.com",
+							},
+							{
+								userId: 4,
+								name: "Jake Sadie",
+								email: "jake@sadie.com",
+							},
+						]
+					},
+					{
+						id: 2345,
+						name: "SF Currierites",
+					},
+					{
+						id: 1,
+						name: "Test Group 1",
+					},
+					{
+						id: 2,
+						name: "Test Group 2",
+					},
+					{
+						id: 3,
+						name: "Test Group 3",
+					},
+				],
+				meals: [
+					{
+						groupId: 1234,
+						model: {
+							date: new Date(),
+							availability: {
+								1: AVAILABLE,
+								2: NOT_RESPONDED,
+								3: NOT_RESPONDED,
+								4: UNAVAILABLE,
+							},
+							recipe: null,
+						}
+					}
+				],
+
+				
+				mealPlanningIsInProgress: function(meal) {
+					var numberUsers = this.mealNumberUsers(meal);
+					var numberResponses = this.mealNumberResponses(meal);
+					return numberUsers != numberResponses;
+				},
+				mealNumberResponses: function(meal) {
+					var numberResponses = 0;
+					for(var key in meal) {
+						if(meal.hasOwnProperty(key)) {
+							if(meal[key] != NOT_RESPONDED) {
+								numberResponses += 1;
+							}
+						}
+					}
+					return numberResponses;
+				},
+				mealNumberUsers: function(meal) {
+					var numberUsers = 0;
+					for(var key in meal) {
+						if(meal.hasOwnProperty(key)) {
+							numberUsers += 1;
+						}
+					}
+					return numberUsers;
+				},
+			});
+
+		})();
+	</script>
+</polymer-element>
