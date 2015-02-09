@@ -2,19 +2,17 @@
 
 <polymer-element name="dinder-model" attributes="">
 	<script>
-		(function() {
+		window.Dinder = window.Dinder || {};
 
-			var AVAILABLE = 1,
-			    UNAVAILABLE = 2,
-			    NOT_RESPONDED = 3;
+		(function(Dinder) {
+
+			Dinder.consts = {
+				AVAILABLE: 1,
+			    UNAVAILABLE: 2,
+			    NOT_RESPONDED: 3,
+			};
 
 			Polymer({
-				consts: {
-					AVAILABLE: AVAILABLE,
-			    	UNAVAILABLE: UNAVAILABLE,
-			    	NOT_RESPONDED: NOT_RESPONDED,
-				},
-
 				user: {
 					id: 1,
 					name: "Tom Buckley",
@@ -47,38 +45,38 @@
 							},
 						]
 					},
-					{
-						id: 2345,
-						name: "SF Currierites",
-					},
-					{
-						id: 1,
-						name: "Test Group 1",
-					},
-					{
-						id: 2,
-						name: "Test Group 2",
-					},
-					{
-						id: 3,
-						name: "Test Group 3",
-					},
 				],
-				meals: [
-					{
-						groupId: 1234,
-						model: {
+				meals: {
+					1234: {
+						date: new Date(),
+						availability: {
+							1: Dinder.consts.AVAILABLE,
+							2: Dinder.consts.NOT_RESPONDED,
+							3: Dinder.consts.NOT_RESPONDED,
+							4: Dinder.consts.UNAVAILABLE,
+						},
+						recipe: null,
+					}
+				},
+
+				ready: function() {
+					for(var i = 0; i < 50; i++) {
+						this.groups.push({
+							id: i,
+							name: "Test Group " + (i + 1),
+						});
+						this.meals[i] = {
 							date: new Date(),
 							availability: {
-								1: AVAILABLE,
-								2: NOT_RESPONDED,
-								3: NOT_RESPONDED,
-								4: UNAVAILABLE,
+								1: Dinder.consts.NOT_RESPONDED,
+								2: Dinder.consts.NOT_RESPONDED,
+								3: Dinder.consts.NOT_RESPONDED,
+								4: Dinder.consts.NOT_RESPONDED,
 							},
 							recipe: null,
 						}
 					}
-				],
+				},
 
 				
 				mealPlanningIsInProgress: function(meal) {
@@ -108,6 +106,6 @@
 				},
 			});
 
-		})();
+		})(window.Dinder);
 	</script>
 </polymer-element>

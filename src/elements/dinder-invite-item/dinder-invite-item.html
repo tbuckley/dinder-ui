@@ -1,0 +1,42 @@
+<link rel="import" href="../../components/polymer/polymer.html">
+<link rel="import" href="../../components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-list-item/paper-list-item.html">
+
+<polymer-element name="dinder-invite-item">
+  <template>
+    <paper-list-item avatar lines="2">
+      <div avatar>
+        <div>{{ group.name[0] }}</div>
+      </div>
+      <div title>{{ group.name }}</div>
+      <div description>{{ meal.availability[user.id] | responseStatus }}</div>
+      <paper-icon-button control icon="check" on-tap="{{acceptInvite}}"></paper-icon-button>
+      <paper-icon-button control icon="clear" on-tap="{{rejectInvite}}"></paper-icon-button>
+    </paper-list-item>
+  </template>
+  <script>
+    Polymer({
+      publish: {
+        group: null,
+        meal: null,
+        user: null,
+      },
+
+      acceptInvite: function(event, detail, sender) {
+        this.meal.availability[this.user.id] = Dinder.consts.AVAILABLE;
+      },
+      rejectInvite: function(event, detail, sender) {
+        this.meal.availability[this.user.id] = Dinder.consts.UNAVAILABLE;
+      },
+
+      responseStatus: function(status) {
+        switch(status) {
+          case Dinder.consts.AVAILABLE: return "Available";
+          case Dinder.consts.UNAVAILABLE: return "Unavailable";
+          case Dinder.consts.NOT_RESPONDED: return "Not responded";
+          default: return "Unknown";
+        }
+      },
+    });
+  </script>
+</polymer-element>

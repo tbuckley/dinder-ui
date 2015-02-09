@@ -2,9 +2,8 @@
 <link rel="import" href="../../components/core-list/core-list.html">
 <link rel="import" href="../../components/core-icon/core-icon.html">
 <link rel="import" href="../../components/paper-button/paper-button.html">
-<link rel="import" href="../../components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../paper-list-item/paper-list-item.html">
 <link rel="import" href="../dinder-placeholder-view/dinder-placeholder-view.html">
+<link rel="import" href="../dinder-invite-item/dinder-invite-item.html">
 
 <polymer-element name="dinder-invitations-list">
   <template>
@@ -25,19 +24,12 @@
 
     <!-- Populated list -->
     <template if="{{ hasInvitations }}">
-      <core-list data="{{ groups }}">
-        <template>
-          <paper-list-item avatar lines="2">
-            <div avatar>
-              <div>{{ model.name[0] }}</div>
-            </div>
-            <div title>{{ model.name }}</div>
-            <div description>PLACEHOLDER</div>
-            <paper-icon-button control icon="check"></paper-icon-button>
-            <paper-icon-button control icon="clear"></paper-icon-button>
-          </paper-list-item>
+      <section list>
+        <template repeat="{{group in groups}}">
+          <dinder-invite-item group="{{group}}" meal="{{meals[group.id]}}" user="{{user}}">
+          </dinder-invite-item>
         </template>
-      </core-list>
+      </section>
     </template>
 
   </template>
@@ -46,6 +38,7 @@
       publish: {
         groups: null,
         meals: null,
+        user: null,
       },
       computed: {
         hasInvitations: "groups && groups.length > 0",
